@@ -32,15 +32,29 @@ function reset(){
 }
 
 function inputNumber() {
-  const inputElement = input as HTMLInputElement; // Castear el elemento input a HTMLInputElement
-  const inputValue = inputElement.value; // Obtener el valor del input
-  const numeroTurnoElement = document.getElementById("numero-turno");
-  if (numeroTurnoElement && inputValue) {
-    numeroTurnoElement.innerHTML = inputValue.toString().padStart(2, "0"); // Aplicar el valor en el DOM con padStart
+  if (input instanceof HTMLInputElement) {
+    const inputValue = input.value; 
+    const numeroTurnoElement = document.getElementById("numero-turno");
+    if (numeroTurnoElement && inputValue) {
+      numeroTurnoElement.innerHTML = inputValue.toString().padStart(2, "0"); // Aplicar el valor en el DOM con padStart
+    }
   }
 }
 
-boton1?.addEventListener("click", sumar);
-boton2?.addEventListener("click", restar);   
-boton3?.addEventListener("click", reset);
-input?.addEventListener("change", inputNumber);
+if (boton1 !== null && boton1 !== undefined) {
+  boton1.addEventListener("click", sumar);
+}
+
+if (boton2 !== null && boton2 !== undefined) {
+  boton2.addEventListener("click", restar);
+}
+
+if (boton3 !== null && boton3 !== undefined) {
+  boton3.addEventListener("click", reset);
+}
+
+if (input !== null && input !== undefined) {
+  input.addEventListener("change", inputNumber);
+}
+
+
