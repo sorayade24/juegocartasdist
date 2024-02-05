@@ -1,56 +1,46 @@
 import "./style.css";
 
-const estiloNombre= "font-size:24px; background-color:green; font-style:bold";
+let boton1 = document.getElementById("sumando1"); //variable de boton para incrementar valor
+let boton2 = document.getElementById("restando1"); //variable de boton para decrementar valor
+let boton3 = document.getElementById("reset"); //variable de boton para resetear valor
+let input = document.getElementById("input"); //variable de input para ingresar valor
+let numero = parseInt(document.getElementById("numero-turno")?.innerHTML || "0"); //variable del numero en el DOM
 
-interface Grupo{
-    nombre: string;
-    año: number;
-    activo: boolean;
-    genero: string;
+      
+function sumar() {
+  let result = ++numero;                               //variable con el resultado
+  const numeroTurnoElement = document.getElementById("numero-turno");
+  if (numeroTurnoElement) {
+    numeroTurnoElement.innerHTML = result.toString().padStart(2, "0"); //Muestra resultado de la funcion en DOM con padStart
+  }
 }
 
-const grupo1: Grupo ={
-    nombre: "The Beatles",
-    año: 1960,
-    activo: true,
-    genero: "🎵 Pop Rock",
+function restar() {
+  let result = --numero;                               //variable con el resultado
+  const numeroTurnoElement = document.getElementById("numero-turno");
+  if (numeroTurnoElement) {
+    numeroTurnoElement.innerHTML = result.toString().padStart(2, "0"); //Muestra resultado de la funcion en DOM con padStart
+  }
 }
 
-console.log("%c The Beatles" ,estiloNombre, grupo1);
-
-const grupo2: Grupo ={
-    nombre: "Queen",
-    año: 1970,
-    activo: false,
-    genero: "🎸 Rock"
-}
-console.log("%c Queen" ,estiloNombre, grupo2);
-
-const grupo3: Grupo ={
-    nombre: "AC DC",
-    año: 1973,
-    activo: true,
-    genero: "🤘 Hard Rock"
+function reset(){
+  numero = 0; 
+  let numeroTurnoElement = document.getElementById("numero-turno");                           
+  if (numeroTurnoElement) {
+    numeroTurnoElement.innerHTML = numero.toString().padStart(2, "0"); //Muestra resultado de la funcion en DOM con padStart
+  }
 }
 
-console.log("%c AC DC" ,estiloNombre, grupo3);
-
-const grupo4: Grupo ={
-    nombre: "Ludwig van Beethoven",
-    año: 1770,
-    activo: false,
-    genero: "🎼 Clásica"
+function inputNumber() {
+  const inputElement = input as HTMLInputElement; // Castear el elemento input a HTMLInputElement
+  const inputValue = inputElement.value; // Obtener el valor del input
+  const numeroTurnoElement = document.getElementById("numero-turno");
+  if (numeroTurnoElement && inputValue) {
+    numeroTurnoElement.innerHTML = inputValue.toString().padStart(2, "0"); // Aplicar el valor en el DOM con padStart
+  }
 }
 
-console.log("%c Ludwig van Beethoven" ,estiloNombre, grupo4);
-
-
-const grupo5: Grupo ={
-    nombre: "The Rolling Stones",
-    año: 1962,
-    activo: true,
-    genero: "🎸 Rock"
-}
-
-console.log("%c The Rolling Stones" ,estiloNombre, grupo5);
-
+boton1?.addEventListener("click", sumar);
+boton2?.addEventListener("click", restar);   
+boton3?.addEventListener("click", reset);
+input?.addEventListener("change", inputNumber);
