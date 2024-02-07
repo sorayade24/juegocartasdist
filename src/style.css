@@ -1,7 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-.miniatura{
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.juego{
+  color: #ffffff;
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+}
+
+.tablero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 30px;
+  color: #fff;
+}
+.mensaje{
+  font-size: 32px;
+  text-align: center;
+  margin: 30px 0px 30px 0px;
+  color: #ffffff;
+
+}
+
+.miniatura {
   width: 300px;
   cursor: pointer;
+}
+.botones-default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 18px;
+}
+
+.botones-default button {
+  cursor: pointer;
+  background: linear-gradient(
+      345deg,
+      #0f673f 0%,
+      #105026 33%,
+      rgba(255, 255, 255, 0) 66%,
+      rgba(255, 255, 255, 0) 100%
+    )
+    99% 50%/400% 400%;
+  border: 2px solid transparent;
+  color: white;
+  overflow: hidden;
+  transition: all 0.5s ease 0s !important;
+}
+.botones-default button:hover {
+  background-position: 1% 50%;
+  border: 2px solid #dee3e1;
+  color: white;
+  transition: all 0.5s ease 0s !important;
+}
+
+.botones-default button:disabled,
+button[disabled] {
+  background: linear-gradient(
+      345deg,
+      #e6e1e1 0%,
+      #979797 33%,
+      rgba(255, 255, 255, 0) 66%,
+      rgba(255, 255, 255, 0) 100%
+    )
+    99% 50%/400% 400%;
+}
+
+
+
+.botones-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 18px;
+  margin: 20px 0px 20px 0px;
+  flex-wrap: wrap;
+}
+
+.botones-2 button {
+  cursor: pointer;
+  background: linear-gradient(
+      345deg,
+      #0f673f 0%,
+      #105026 33%,
+      rgba(255, 255, 255, 0) 66%,
+      rgba(255, 255, 255, 0) 100%
+    )
+    99% 50%/400% 400%;
+  border: 2px solid transparent;
+  color: white;
+  overflow: hidden;
+  transition: all 0.5s ease 0s !important;
+}
+.botones-2 button:hover {
+  background-position: 1% 50%;
+  border: 2px solid #dee3e1;
+  color: white;
+  transition: all 0.5s ease 0s !important;
 }
 
 .turno-display {
@@ -30,9 +140,9 @@
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 600;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -60,6 +170,24 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: rgb(2, 0, 36);
+  background: #0f3443; /* Old browsers */
+  background: -moz-linear-gradient(
+    left,
+    #0f3443 0%,
+    #34e69f 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    left,
+    #0f3443 0%,
+    #34e69f 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to right,
+    #0f3443 0%,
+    #34e69f 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f3443', endColorstr='#34e69f',GradientType=1 );
 }
 
 h1 {
@@ -125,4 +253,21 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+@media screen and (max-width: 420px){
+#back{
+  display: none;
+}
+.botones-default{
+  flex-direction: column;
+  gap: 20px;
+}
+.tablero{
+  font-size: 22px;
+}
+.juego{
+  max-width: 100%;
+}
+  
 }

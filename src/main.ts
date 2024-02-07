@@ -1,133 +1,213 @@
 import "./style.css";
 
-// let boton1 = document.getElementById("sumando1"); //variable de boton para incrementar valor
-// let boton2 = document.getElementById("restando1"); //variable de boton para decrementar valor
-// let boton3 = document.getElementById("reset"); //variable de boton para resetear valor
-// let input = document.getElementById("input"); //variable de input para ingresar valor
-// let numero = parseInt(document.getElementById("numero-turno")?.innerHTML || "0"); //variable del numero en el DOM
+/// juego siete y medio
 
-      
-// function sumar() {
-//   let result = ++numero;                               //variable con el resultado
-//   const numeroTurnoElement = document.getElementById("numero-turno");
-//   if (numeroTurnoElement) {
-//     numeroTurnoElement.innerHTML = result.toString().padStart(2, "0"); //Muestra resultado de la funcion en DOM con padStart
-//   }
-// }
+let generarNumeroAleatorio = () => Math.floor(Math.random() * 13);
 
-// function restar() {
-//   let result = --numero;                               //variable con el resultado
-//   const numeroTurnoElement = document.getElementById("numero-turno");
-//   if (numeroTurnoElement) {
-//     numeroTurnoElement.innerHTML = result.toString().padStart(2, "0"); //Muestra resultado de la funcion en DOM con padStart
-//   }
-// }
+let puntuacionJugador = 0;
+let mensaje = document.getElementById("mensaje");
+let nuevaPartida = document.getElementById("nuevaPartida");
 
-// function reset(){
-//   numero = 0; 
-//   let numeroTurnoElement = document.getElementById("numero-turno");                           
-//   if (numeroTurnoElement) {
-//     numeroTurnoElement.innerHTML = numero.toString().padStart(2, "0"); //Muestra resultado de la funcion en DOM con padStart
-//   }
-// }
+let dameCarta = document.getElementById("boton");
+let futuro = document.getElementById("boton2");
+let mePlanto = document.getElementById("btn-plantarse");
 
-// function inputNumber() {
-//   if (input instanceof HTMLInputElement) {
-//     const inputValue = input.value; 
-//     const numeroTurnoElement = document.getElementById("numero-turno");
-//     if (numeroTurnoElement && inputValue) {
-//       numeroTurnoElement.innerHTML = inputValue.toString().padStart(2, "0"); // Aplicar el valor en el DOM con padStart
-//     }
-//   }
-// }
+//funciones
 
-// if (boton1 !== null && boton1 !== undefined) {
-//   boton1.addEventListener("click", sumar);
-// }
-
-// if (boton2 !== null && boton2 !== undefined) {
-//   boton2.addEventListener("click", restar);
-// }
-
-// if (boton3 !== null && boton3 !== undefined) {
-//   boton3.addEventListener("click", reset);
-// }
-
-// if (input !== null && input !== undefined) {
-//   input.addEventListener("change", inputNumber);
-// }
-
-
-
-const generarNumeroAleatorio = Math.floor(Math.random() * 11);
-const NO_ES_UN_NUMERO = 0;
-const NO_ES_EL_NUMERO_SECRETO = 1;
-const ES_EL_NUMERO_SECRETO = 2;
-let intentos = 0;
-let max_intentos = 5;
-const numeroAcertar = generarNumeroAleatorio;
-
-const handleComprobar = () => {
-  let texto = document.getElementById("input").value;
-  const estado = comprobarNumero(texto);
-  muestraMensajeComprobacion(texto, estado);
+let muestraPuntuacion = () => {
+  let puntuacion = document.getElementById("puntuacion");
+  if (puntuacion) {
+    puntuacion.innerHTML = puntuacionJugador.toString();
+  }
 };
 
-let botonComprobar = document.getElementById("comprobar");
-botonComprobar.addEventListener("click", handleComprobar);
 
-function comprobarNumero(texto) {
-  console.log("Comprobando numero");
+let muestraCarta = () => {
+  let numero = generarNumeroAleatorio();
+  let imagen = document.getElementById("carta");
 
-  let numero = parseInt(texto);
-  let esUnNumero = !isNaN(numero);
-  console.log(numeroAcertar);
-
-  if (!esUnNumero) {
-    return NO_ES_UN_NUMERO;
+  if (numero > 7 && numero < 10) {
+    numero = numero + 2;
+  }
+  if (numero === 0) {
+    numero++;
   }
 
-  return numero === numeroAcertar
-    ? ES_EL_NUMERO_SECRETO
-    : NO_ES_EL_NUMERO_SECRETO;
+  console.log(numero);
+
+  switch (true) {
+    case numero === 1:
+      if (imagen instanceof HTMLImageElement) {
+        imagen.src = "../public/1_as-copas.jpeg";
+      }
+      break;
+    case numero === 2:
+      if (imagen instanceof HTMLImageElement) {
+        imagen.src = "../public/2_dos-copas.jpeg";
+      }
+      break;
+    case numero === 3:
+      if (imagen instanceof HTMLImageElement) {
+        imagen.src = "../public/3_tres-copas.jpeg";
+      }
+      break;
+    case numero === 4:
+      if (imagen instanceof HTMLImageElement) {
+        imagen.src = "../public/4_cuatro-copas.jpeg";
+      }
+      break;
+    case numero === 5:
+      if (imagen instanceof HTMLImageElement) {
+        imagen.src = "../public/5_cinco-copas.jpeg";
+      }
+      break;
+    case numero === 6:
+      if (imagen instanceof HTMLImageElement) {
+        imagen.src = "../public/6_seis-copas.jpeg";
+      }
+      break;
+    case numero === 7:
+      if (imagen instanceof HTMLImageElement) {
+        imagen.src = "../public/7_siete-copas.jpeg";
+      }
+      break;
+    case numero === 10:
+      if (imagen instanceof HTMLImageElement) {
+        imagen.src = "../public/10_sota-copas.jpeg";
+      }
+      numero = 0.5;
+      break;
+    case numero === 11:
+      if (imagen instanceof HTMLImageElement) {
+        imagen.src = "../public/11_caballo-copas.jpeg";
+      }
+      numero = 0.5;
+      break;
+    case numero === 12:
+      if (imagen instanceof HTMLImageElement) {
+        imagen.src = "../public/12_rey-copas.jpeg";
+      }
+      numero = 0.5;
+      break;
+  }
+
+  puntuacionJugador = puntuacionJugador + numero;
+
+  if (puntuacionJugador > 7.5) {
+    if (mensaje instanceof HTMLDivElement) {
+      mensaje.innerHTML = `GAME OVER`;
+    }
+    if (mePlanto instanceof HTMLButtonElement) {
+      mePlanto.disabled = true;
+    }
+    if (dameCarta instanceof HTMLButtonElement) {
+      dameCarta.disabled = true;
+    }
+    if (nuevaPartida instanceof HTMLButtonElement) {
+      nuevaPartida.style.display = 'block';
+    }
+  }
+
+  if (puntuacionJugador === 7.5) {
+    if (mensaje instanceof HTMLDivElement) {
+      mensaje.innerHTML = `¡ Lo has clavado! ¡Enhorabuena!`;
+    }
+    if (mePlanto instanceof HTMLButtonElement) {
+      mePlanto.disabled = true;
+    }
+    if (dameCarta instanceof HTMLButtonElement) {
+      dameCarta.disabled = true;
+    }
+    if (nuevaPartida instanceof HTMLButtonElement) {
+      nuevaPartida.style.display = 'block';
+    }
+  }
+};
+
+let plantarse = () => {
+  switch (true) {
+    case puntuacionJugador <= 4:
+      if (mensaje instanceof HTMLDivElement) {
+        mensaje.innerHTML = `Has sido muy conservador`;
+      }
+      if (mePlanto instanceof HTMLButtonElement) {
+        mePlanto.disabled = true;
+      }
+      if (dameCarta instanceof HTMLButtonElement) {
+        dameCarta.disabled = true;
+      }
+      if (nuevaPartida instanceof HTMLButtonElement) {
+        nuevaPartida.style.display = 'block';
+      }
+      if (futuro instanceof HTMLButtonElement) {
+        futuro.style.display = 'block';
+      }
+      break;
+    case puntuacionJugador > 4 && puntuacionJugador <=5:
+      if (mensaje instanceof HTMLDivElement) {
+        mensaje.innerHTML = `¿Te ha entrado el canguelo eh?`;
+      }
+      if (mePlanto instanceof HTMLButtonElement) {
+        mePlanto.disabled = true;
+      }
+      if (dameCarta instanceof HTMLButtonElement) {
+        dameCarta.disabled = true;
+      }
+      if (nuevaPartida instanceof HTMLButtonElement) {
+        nuevaPartida.style.display = 'block';
+      }
+      if (futuro instanceof HTMLButtonElement) {
+        futuro.style.display = 'block';
+      }
+      break;
+    case puntuacionJugador >5 && puntuacionJugador <=7:
+      if (mensaje instanceof HTMLDivElement) {
+        mensaje.innerHTML = `Casi, casi...`;
+      }
+      if (mePlanto instanceof HTMLButtonElement) {
+        mePlanto.disabled = true;
+      }
+      if (dameCarta instanceof HTMLButtonElement) {
+        dameCarta.disabled = true;
+      }
+      if (nuevaPartida instanceof HTMLButtonElement) {
+        nuevaPartida.style.display = 'block';
+      }
+      if (futuro instanceof HTMLButtonElement) {
+        futuro.style.display = 'block';
+      }
+      break;
+
+}
+}
+let reset = () => {
+  location.reload();
+};
+
+
+
+//eventos
+
+document.addEventListener("DOMContentLoaded", muestraPuntuacion);
+
+if (nuevaPartida !== null && nuevaPartida !== undefined && nuevaPartida instanceof HTMLButtonElement) {
+  nuevaPartida.addEventListener("click", reset);
 }
 
-const muestraMensajeComprobacion = (texto, estado) => {
-  let mensaje = "";
+if (dameCarta !== null && dameCarta !== undefined && dameCarta instanceof HTMLButtonElement) {
+  dameCarta.addEventListener("click", muestraCarta);
+}
 
-  switch (estado) {
-    case NO_ES_UN_NUMERO:
-      mensaje = `${texto} no es un número.`;
-      break;
-    case NO_ES_EL_NUMERO_SECRETO:
-      mensaje = `Lo siento, ${texto} no era el numero. Pista: el número es ${
-        texto > numeroAcertar ? "menor" : "mayor"
-      }`;
-      break;
-    case ES_EL_NUMERO_SECRETO:
-      mensaje = `${texto} es el numero secreto, Eres el ganador!`;
-      botonComprobar.disabled = true;
-      break;
-    default:
-      mensaje = `No deberias estar aquí`;
-      break;
-  }
+if (dameCarta !== null && dameCarta !== undefined && dameCarta instanceof HTMLButtonElement) {
+  dameCarta.addEventListener("click", muestraPuntuacion);
+}
 
-  intentos++;
-  switch (true) {
-    case intentos >= 5:
-      document.getElementById("intentos").innerHTML = `GAME OVER. Has superado el número de intentos: ${max_intentos}`;
-        botonComprobar.disabled = true;
-      break;
-    default:
-        document.getElementById("intentos").innerHTML = `Intentos: ${intentos} de ${max_intentos}`;
-      break;
-  }
+if (mePlanto !== null && mePlanto !== undefined && mePlanto instanceof HTMLButtonElement) {
+  mePlanto.addEventListener("click", plantarse);
+}
 
-  document.getElementById("resultado").innerHTML = mensaje;
-
-};
-
-
-
-
+if (futuro !== null && futuro!== undefined && futuro instanceof HTMLButtonElement) {
+  futuro.addEventListener("click", muestraCarta);
+  futuro.addEventListener("click", muestraPuntuacion);
+  
+}
