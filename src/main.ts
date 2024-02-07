@@ -178,7 +178,7 @@ let plantarse = () => {
       }
       break;
 
-}
+} 
 }
 let reset = () => {
   location.reload();
