@@ -168,7 +168,7 @@ let plantarse = () => {
         mePlanto.disabled = true;
       }
       if (dameCarta instanceof HTMLButtonElement) {
-        dameCarta.disabled = true;
+        dameCarta.disabled = true; 
       }
       if (nuevaPartida instanceof HTMLButtonElement) {
         nuevaPartida.style.display = 'block';
